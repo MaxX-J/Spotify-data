@@ -35,7 +35,7 @@ row.appendChild(td);
 // Tableau d'objets
 
     const artistCount = {};
-    // Objet pour stocker le nombre de morceau de chaque artiste
+    // ça m'aide a stocker
 
     tracks.forEach(track =>{
         track.artists.forEach(artist => {
@@ -44,12 +44,12 @@ row.appendChild(td);
         });
     });
     // Chaque morceau peut avoir plusieurs artistes (feat par exemple), il ne faut pas les oublier
-    // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+    
 
     const sortedArtists = Object.entries(artistCount)
         .sort((a, b) => b[1] - a[1])
         .slice(0, 10);
-    // On trie les artistes (de celui qui a le plus de morceaux en premier...) puis on garde les dix premiers
+    // ça trie les artistes et ça garde  les dix premiers
     // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
 
     const labels = sortedArtists.map(entry => entry[0]);
@@ -128,8 +128,8 @@ row.appendChild(td);
     });
 
     const sortedGenres = Object.entries(genreCount).sort((a, b) => b[1] - a[1]);
-    const topGenres = sortedGenres.slice(0, 7); // Top 7 (doc seven)
-    const autresGenres = sortedGenres.slice(7); // Les autres seront groupés (rip)
+    const topGenres = sortedGenres.slice(0, 7); // Top 7 
+    const autresGenres = sortedGenres.slice(7); // ça groupe les autres 
 
     const genreLabels = topGenres.map(([genre]) => genre);
     const genreValues = topGenres.map(([, count]) => count);
@@ -141,10 +141,10 @@ row.appendChild(td);
     }
 
     const backgroundColors = [
-        "#ff91a9", "#72bef1", "#ffdd88", "#81d3d3",
-        "#b794ff", "#ffbc79", "#6cdb9b", "#b5c0c1"
+        "#ff1493", "#1abc9c ", "#9b59b6", "#f1c40f",
+        "#e67e22", "#ecf0f1 ", "#6cdb9b", "#34495e"
     ];
-    // Couleurs du camembert (en mode rbg)
+    // Couleurs du camembert 
 
     new Chart(document.getElementById('genreChart'), {
         type: 'pie',
