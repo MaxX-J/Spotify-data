@@ -74,17 +74,7 @@
     margin-bottom: 0 !important;
   }
   
-  .transform-hover {
-    transition: transform 0.3s ease;
-  }
-  .overflow-hidden:hover .transform-hover {
-    transform: scale(1.1);
-  }
-  
-  .artist-img-hover {
-    transition: transform 0.3s ease;
-    border-radius: 0.5rem;
-  }
+
   .artist-img-hover:hover {
     transform: scale(1.05);
   }
@@ -140,4 +130,16 @@
       margin-left: auto;
       display: block;
     }
+  }
+
+  .transform-hover {
+    transition: transform 0.3s ease;
+  }
+  .overflow-hidden:hover .transform-hover {
+    transform: scale(1.1);
+  }
+  
+  .artist-img-hover {
+    transition: transform 0.3s ease;
+    border-radius: 0.5rem;
   }
