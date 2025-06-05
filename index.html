@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,21 +10,23 @@
   <title>Spotify stat</title>
 </head>
 <body>
-  <header class="header_modif container-fluid bg-primary text-white d-flex flex-column justify-content-center align-items-center text-center">
-    <h1 class="display-5 fw-bold">Les musiques de Maxens</h1>
-    <p class="lead">Playlist de Mael, moi ça ne marchait pas, mais chute on va dire que ce sont les miennes </p>
-  </header>
+    <div id="header">
+      <h1>Musique de Maxens</h1>
+      <p>
+        Playlist de Mael, moi ça ne marchait pas, mais chute on va dire que ce sont les miennes
+      </p>
+    </div>
 
   <main class="container-xxl">
     <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mt-4 w-100">
-      <div class="chart_bloc_graph w-48 bg-white border rounded shadow-sm overflow-hidden">
+      <div class="chart_bloc_graph  bg-white border rounded shadow-sm overflow-hidden">
         <div class="text-white px-3 py-2 border-bottom m-0 bg-primary">Top 10  Artistes</div>
         <div class="p-4">
           <canvas id="artistChart"></canvas>
         </div>
       </div>
 
-      <div class="chart_bloc_graph w-48 bg-white border rounded shadow-sm overflow-hidden">
+      <div class="chart_bloc_graph  bg-white border rounded shadow-sm overflow-hidden">
         <div class="text-white px-3 py-2 border-bottom m-0 bg-success">Distribution des Genres</div>
         <div class="p-4">
           <canvas id="genreChart"></canvas> 
@@ -49,67 +52,67 @@
     </div>
   </main>
 
-  <div id="popup-overlay" style="display: none;">
-    <div id="popup" class="popup-content bg-white p-4 rounded-4 w-100">
-      <div class="pb-2 d-flex justify-content-between align-items-center d-flex justify-content-between align-items-center border-bottom">
-        <span class="fs-5 fw-semibold">Détails du morceau</span>
-        <button type="button" class="btn d-flex align-items-center justify-content-center p-0 border-0 bg-transparent text-dark fs-4 ms-2" onclick="closePopup()" aria-label="Fermer">
-          &times;
+  <div class="modal fade" id="trackModal" tabindex="-1" role="dialog" aria-labelledby="trackModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="trackModalLabel">Détails du morceau</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+          <span aria-hidden="true">&times;</span>
         </button>
-      </div>      
-      <hr class="popup-divider">
-      <div class="popup-body d-flex flex-column flex-md-row my-4">
-        <div class="me-md-4 mb-3 mb-md-0" style="flex: 1;">
-          <img id="popup-album-img" class="img-fluid mb-2 rounded" alt="">
-          <div class="fs-6 fw-semibold"><span id="popup-album-name"></span></div>
-          <div class="text-secondary my-2">
-            <span id="popup-release-date"></span> • <span id="popup-total-tracks"></span> titres
+      </div>
+      <div class="modal-body">
+        <!-- Place ici ton ancien contenu de "popup-content" sans l'enrobage -->
+        <!-- Exemple de structure interne -->
+        <div class="row">
+          <div class="col-md-4 text-center">
+            <img id="popup-album-img" class="img-fluid rounded mb-2" alt="">
+            <div class="fs-6 fw-semibold" id="popup-album-name"></div>
+            <div class="text-secondary my-2">
+              <span id="popup-release-date"></span> • <span id="popup-total-tracks"></span> titres
+            </div>
+            <div class="badge badge-success">Popularité: <span id="popup-album-popularity"></span></div>
           </div>
-          <div class="badge text-bg-success">Popularité: <span id="popup-album-popularity"></span></div>
-        </div>
-        <div style="flex: 2;">
-          <div class="mb-2 fs-5 fw-semibold"><span id="popup-title"></span></div>
-          <div class="mb-2 fs-7 fw-semibold text-secondary">Preview audio</div>
-          <div class="mb-2"><audio id="popup-audio" controls style="width: 100%;"></audio></div>
-          <div class="mb-2 fs-7 fw-semibold text-secondary">Informations sur le morceau</div>
-          <table class="table table-borderless mb-2">
-            <tbody>
-              <tr class="border-bottom border-secondary-subtle">
-                <td>Durée :</td>
-                <td class="text-end"><span class="badge bg-primary rounded-pill" id="popup-duration"></span></td>
-              </tr>
-              <tr class="border-bottom border-secondary-subtle">
-                <td>Popularité :</td>
-                <td class="text-end"><span id="popup-track-popularity"></span></td>
-              </tr>
-              <tr class="border-bottom border-secondary-subtle">
-                <td>Numéro de piste :</td>
-                <td class="text-end"><span id="popup-track-number"></span></td>
-              </tr>
-              <tr>
-                <td>Explicit :</td>
-                <td class="text-end"><span id="popup-explicit"></span></td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="fs-7 fw-semibold text-secondary">Artistes</div>
-          <div id="popup-artists" class="mt-3"></div>
-          <div class="mb-2 fs-7 fw-semibold text-secondary">Genres</div>
-          <div class="mb-2"><span id="popup-genres"></span></div>
-          <div class="position-relative" style="height: 40px;">
-            <a id="popup-spotify-link" target="_blank" class="btn btn-success btn-sm d-flex align-items-center position-absolute bottom-0 end-0">
+          <div class="col-md-8">
+            <h5 id="popup-title"></h5>
+            <p class="text-muted">Preview audio</p>
+            <audio id="popup-audio" controls class="w-100 mb-3"></audio>
+            <table class="table table-sm">
+              <tbody>
+                <tr>
+                  <td>Durée</td>
+                  <td class="text-right"><span class="badge badge-primary" id="popup-duration"></span></td>
+                </tr>
+                <tr>
+                  <td>Popularité</td>
+                  <td class="text-right" id="popup-track-popularity"></td>
+                </tr>
+                <tr>
+                  <td>Numéro de piste</td>
+                  <td class="text-right" id="popup-track-number"></td>
+                </tr>
+                <tr>
+                  <td>Explicit</td>
+                  <td class="text-right" id="popup-explicit"></td>
+                </tr>
+              </tbody>
+            </table>
+            <div id="popup-artists"></div>
+            <div class="mt-2"><strong>Genres:</strong> <span id="popup-genres"></span></div>
+            <a id="popup-spotify-link" href="#" target="_blank" class="btn btn-success btn-sm mt-3">
               <i class="bi bi-spotify me-1"></i> Ouvrir dans Spotify
             </a>
           </div>
         </div>
       </div>
-      <hr class="popup-divider">
-      <div class="popup-footer d-flex justify-content-end align-items-center gap-2">
-        <button class="btn btn-secondary" onclick="closePopup()">Fermer</button>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
       </div>
     </div>
   </div>
-
+</div>   
+      
+          
   <div class="container mt-5">
     <h2 class="mb-4">Albums Populaires</h2>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-6 g-4" id="popularAlbums"></div>
@@ -121,8 +124,10 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script/script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

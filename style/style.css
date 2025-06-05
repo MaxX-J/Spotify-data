@@ -1,20 +1,18 @@
-.header_modif {
-    height: 216px; 
-  }
-  
-  .chart_bloc_graph {
-    width: 48%;
-    min-width: 300px;
-    max-width: 1320px;
-  }
+#header {
+    background-color: #1a67f6;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
   
   .chart_bloc_morceaux {
     margin-top: 64px;
   }
   
   canvas {
-    height: 300px !important;
-    width: auto !important;
+    height: 400px !important;
+    width: 600px !important;
   }
   
   .btn-custom-size {
@@ -24,41 +22,17 @@
   
   #trackTable td, #trackTable th {
     border: none;
-    border-top: 1px solid #dee2e6;
+    border-top: 1px solid #a0a3a5;
     border-bottom: 1px solid #dee2e6;
   }
   
   #trackTable thead th {
-    background-color: #e9ecef;
+    background-color: #ffffff;
   }
   
-  #popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1050;
-  }
+ 
   
-  .popup-content {
-    max-width: 900px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  }
-  
-  .popup-divider {
-    border: none;
-    border-top: 1px solid #ccc;
-    margin: 0 -20px;
-  }
-  
-  .popup-footer {padding: 10px 0 5px;}
+ 
   
   .d-none {display: none !important;}
   
@@ -107,8 +81,8 @@
     }
     
     #trackTable tr {
-      border-top: 4px solid #c8d8e7;
-      background-color: #ffffff;
+      border-top: 4px solid #007df1;
+      background-color: #c8e6ff;
     }
     
     #trackTable td {

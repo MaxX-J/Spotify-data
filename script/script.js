@@ -1,3 +1,4 @@
+
 fetch("data.json")
 // Il permet de récupérer un fichier distant
 
@@ -50,7 +51,7 @@ row.appendChild(td);
         .sort((a, b) => b[1] - a[1])
         .slice(0, 10);
     // ça trie les artistes et ça garde  les dix premiers
-    // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+  
 
     const labels = sortedArtists.map(entry => entry[0]);
     const values = sortedArtists.map(entry => entry[1]);
@@ -141,11 +142,16 @@ row.appendChild(td);
     }
 
     const backgroundColors = [
-        "#ff1493", "#1abc9c ", "#9b59b6", "#f1c40f",
-        "#e67e22", "#ecf0f1 ", "#6cdb9b", "#34495e"
-    ];
-    // Couleurs du camembert 
-
+    "#3498db", // bleu clair
+    "#e74c3c", // rouge vif
+    "#2ecc71", // vert vif
+    "#f39c12", // orange foncé
+    "#8e44ad", // violet foncé
+    "#1abc9c", // turquoise
+    "#d35400", // brun/orange foncé
+    "#7f8c8d"  // gris moyen
+];
+    
     new Chart(document.getElementById('genreChart'), {
         type: 'pie',
 
@@ -242,7 +248,7 @@ top12.forEach(album => {
 })
 
 function openPopup(track) {
-    document.getElementById("popup-overlay").style.display = "flex";
+  $('#trackModal').modal('show')
     const album = track.album;
     const artists = track.artists;
     const albumArtists = album.artists.map(a => a.name).join(", ");
@@ -336,14 +342,12 @@ artists.forEach(artist => {
   }
   
   function closePopup() {
-    const popup = document.getElementById("popup-overlay");
-    popup.style.display = "none";
-  
-    const audio = document.getElementById("popup-audio");
-    if (audio) {
-      audio.pause();
-      audio.currentTime = 0;
-    }
+  $('#trackModal').modal('hide');
+  const audio = document.getElementById("popup-audio");
+  if (audio) {
+    audio.pause();
+    audio.currentTime = 0;
   }
+}
   
   console.log("Hello World");
